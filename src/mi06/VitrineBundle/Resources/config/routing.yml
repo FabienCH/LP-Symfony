@@ -1,0 +1,27 @@
+mi06_vitrine_homepage:
+    path:     /accueil/{name}
+    defaults: { _controller: mi06VitrineBundle:Default:index, name: Visiteur }
+    
+mi06_vitrine_catalogue:
+    path:     /catalogue/
+    defaults: { _controller: mi06VitrineBundle:Default:catalogue }
+    
+mi06_articles_caterorie:
+    path:     /articlesParCategorie/{id}
+    defaults: { _controller: mi06VitrineBundle:Default:articlesParCategorie }
+    
+mi06_vitrine_mentions:
+    path:     /mentions/
+    defaults: { _controller: mi06VitrineBundle:Default:mentions }
+    
+mi06_panier:
+    path:     /panier/
+    defaults: { _controller: mi06VitrineBundle:Panier:contenuPanier }
+    
+mi06_ajout_article:
+    path:     /ajoutArticle/{idArticle}/quantite/{quantite}
+    defaults: { _controller: mi06VitrineBundle:Panier:ajoutArticle, quantite: 1}
+    
+mi06_vider_panier:
+    path:     /viderPanier/
+    defaults: { _controller: mi06VitrineBundle:Panier:viderPanier}

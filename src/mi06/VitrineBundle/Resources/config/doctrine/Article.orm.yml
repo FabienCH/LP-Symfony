@@ -1,0 +1,28 @@
+mi06\VitrineBundle\Entity\Article:
+    type: entity
+    table: article
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        libelle:
+            type: string
+            length: 100
+        prix:
+            type: float
+        stock:
+            type: integer
+
+    manyToOne:
+        articleCategorie:
+            targetEntity: ArticleCategorie
+            inversedBy: article
+            joinColumn:
+                name: catId
+                referencedColumnName: id
+                
+    oneToMany:
+        ligneArticle:
+            targetEntity: LigneCommande
+            mappedBy: article

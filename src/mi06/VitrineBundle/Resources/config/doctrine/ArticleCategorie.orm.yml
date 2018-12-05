@@ -1,0 +1,16 @@
+mi06\VitrineBundle\Entity\ArticleCategorie:
+    type: entity
+    table: articleCategorie
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        intitule:
+            type: string
+            length: 100
+            
+    oneToMany:
+        article:
+            targetEntity: Article
+            mappedBy: articleCategorie

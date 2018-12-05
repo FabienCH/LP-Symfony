@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Shop Homepage - Start Bootstrap Template</title>
+        <!-- Bootstrap core CSS -->
+        <link href="{{ asset('bundles/mi06Vitrine/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="{{ asset('bundles/mi06Vitrine/css/shop-homepage.css') }}" rel="stylesheet">
+    </head>
+    <body>
+        <!-- Navigation -->
+        {% include "mi06VitrineBundle::navbar.html.twig" %}
+        <!-- Page Content -->
+        <div class="container">
+            <div class="row">
+                <!-- Menu -->
+                {% include "mi06VitrineBundle::menu.html.twig" %}
+                <!-- /.col-lg-3 -->
+                {% block content %}
+                {% endblock %}
+                <!-- /.col-lg-9 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+        <!-- Footer -->
+        {% include "mi06VitrineBundle::navbar.html.twig" %}
+        <!-- Bootstrap core JavaScript -->
+        <script src="{{ asset('bundles/mi06Vitrine/vendor/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('bundles/mi06Vitrine/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    </body>
+</html>

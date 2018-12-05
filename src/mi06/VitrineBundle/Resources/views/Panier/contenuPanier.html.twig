@@ -1,0 +1,18 @@
+{% extends "mi06VitrineBundle::layout.html.twig" %}
+{% block content %}
+    <div class="col-lg-9">
+        {% if panier %}
+            <ul>
+                {% for article in articles %}
+                    <li>{{ article.libelle }} {{ article.prix }} {{ panier.contenu[article.id] }}</li>
+                {% endfor %}
+            </ul>
+            <p>Total : {{ totalPanier }}<p>
+            <p><a href="/viderPanier">Vider le panier</a><p>
+        {% else %}
+            <p>Votre panier est vide<p>
+        {% endif %}           
+        <!-- /.row -->
+    </div>
+    <!-- /.col-lg-9 -->
+{% endblock %}

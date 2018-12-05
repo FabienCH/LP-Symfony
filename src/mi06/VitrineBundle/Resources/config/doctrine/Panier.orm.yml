@@ -1,0 +1,11 @@
+mi06\VitrineBundle\Entity\Panier:
+    type: entity
+    table: panier
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        contenu:
+            type: array
+       
