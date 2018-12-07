@@ -155,4 +155,9 @@ class Client
     {
         return $this->commande;
     }
+    
+    public function __toString()
+    { 
+        return $this->getEmail(); 
+    }
 }

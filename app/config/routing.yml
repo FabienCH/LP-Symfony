@@ -2,6 +2,14 @@ mi06_vitrine:
     resource: "@mi06VitrineBundle/Resources/config/routing.yml"
     prefix:   /
 
+mi06_vitrine_client:
+    resource: "@mi06VitrineBundle/Resources/config/routing/client.yml"
+    prefix: /client
+
+mi06_vitrine_commande:
+    resource: "@mi06VitrineBundle/Resources/config/routing/commande.yml"
+    prefix:   /commande
+
 app:
     resource: '@AppBundle/Controller/'
     type: annotation

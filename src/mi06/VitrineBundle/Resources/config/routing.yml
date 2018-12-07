@@ -1,3 +1,7 @@
+mi06_vitrine_client:
+    resource: "@mi06VitrineBundle/Resources/config/routing/client.yml"
+    prefix:   /client
+
 mi06_vitrine_homepage:
     path:     /accueil/{name}
     defaults: { _controller: mi06VitrineBundle:Default:index, name: Visiteur }
@@ -25,3 +29,7 @@ mi06_ajout_article:
 mi06_vider_panier:
     path:     /viderPanier/
     defaults: { _controller: mi06VitrineBundle:Panier:viderPanier}
+
+mi06_validation_panier:
+    path:     /validationPanier/
+    defaults: { _controller: mi06VitrineBundle:Panier:validationPanier}

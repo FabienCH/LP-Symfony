@@ -5,6 +5,8 @@ namespace mi06\VitrineBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use mi06\VitrineBundle\Entity\Panier;
+use mi06\VitrineBundle\Entity\LigneCommande;
+use mi06\VitrineBundle\Entity\Commande;
 
 class PanierController extends Controller
 {   
@@ -79,5 +81,26 @@ class PanierController extends Controller
         $panier->viderPanier();
         $session->set('panier', $panier);
         return $this->redirect($this->generateUrl('mi06_panier'));
+    }
+    
+    public function validationPanierAction(Request $request)
+    {
+        $session = $request->getSession();
+        if($session->has('panier') && $session->has('clientId') && !empty($session->get('panier')->getContenu()))
+        {
+            $em = $this->getDoctrine()->getManager();
+            $panier = $session->get('panier');
+            $commande = new Commande();
+            $client = $em->getRepository('mi06VitrineBundle:Client')->find($session->get('clientId'));
+            $commande->setClient($client);
+            foreach ($panier->getContenu() as $articleId => $quantite) {
+                $ligneCommande = new LigneCommande();
+                $article = $em->getRepository('mi06VitrineBundle:Article')->find($articleId);
+                $ligneCommande->setArticlePrix($article->getPrix());
+                $ligneCommande->setQuantite($quantite);
+                $ligneCommande->setCommande($commande);
+                $commande->addLigneCommande($ligneCommande);
+            }
+        }
     }
 }
