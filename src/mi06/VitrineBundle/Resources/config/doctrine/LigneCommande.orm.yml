@@ -1,6 +1,7 @@
 mi06\VitrineBundle\Entity\LigneCommande:
     type: entity
     table: ligneCommannde
+    repositoryClass: mi06\VitrineBundle\Repository\LigneCommandeRepository 
     id:
         commande:
             associationKey: true

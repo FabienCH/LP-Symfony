@@ -1,0 +1,10 @@
+<h3>Votre panier</h3>
+<div class="col-lg-12">
+    {% if nbArticles %}
+        <p>Nombres d'articles : {{ nbArticles }}<p>
+        <p>Montant : {{ totalPanier }}<p>
+    {% else %}
+        <p>Votre panier est vide<p>
+    {% endif %}           
+<!-- /.row -->
+</div>

@@ -35,6 +35,30 @@ class PanierController extends Controller
         }
     }
     
+    public function contenuPanierAsideAction(Request $request)
+    {
+        $session = $request->getSession();
+        if($session->has('panier') && !empty($session->get('panier')->getContenu()))
+        {
+            $panier = $session->get('panier');
+            $totalPanier = 0;
+            foreach($panier->getContenu() as $idArticle => $quantité) {
+                $em = $this->getDoctrine()->getManager();
+                $article = $em->getRepository('mi06VitrineBundle:Article')->find($idArticle);
+                $totalPanier += $article->getPrix() * $quantité; 
+            }
+            
+            return $this->render('mi06VitrineBundle:Panier:contenuPanierAside.html.twig',
+            array('nbArticles' => count($panier->getContenu()),
+                'totalPanier' => $totalPanier));
+        }
+        else {
+            return $this->render('mi06VitrineBundle:Panier:contenuPanierAside.html.twig',
+            array('nbArticles' => null,
+                'totalPanier' => null));
+        }
+    }
+    
     public function ajoutArticleAction(Request $request, int $idArticle, int $quantite)
     {
         $panier = new Panier;
