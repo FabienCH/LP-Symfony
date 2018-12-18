@@ -86,6 +86,7 @@ class PanierController extends Controller
     public function validationPanierAction(Request $request)
     {
         $session = $request->getSession();
+        $session->set('clientId', 1);
         if($session->has('panier') && $session->has('clientId') && !empty($session->get('panier')->getContenu()))
         {
             $em = $this->getDoctrine()->getManager();
@@ -93,14 +94,28 @@ class PanierController extends Controller
             $commande = new Commande();
             $client = $em->getRepository('mi06VitrineBundle:Client')->find($session->get('clientId'));
             $commande->setClient($client);
+            $em = $this->getDoctrine()->getManager();
             foreach ($panier->getContenu() as $articleId => $quantite) {
                 $ligneCommande = new LigneCommande();
                 $article = $em->getRepository('mi06VitrineBundle:Article')->find($articleId);
                 $ligneCommande->setArticlePrix($article->getPrix());
                 $ligneCommande->setQuantite($quantite);
+                $ligneCommande->setArticle($article);
                 $ligneCommande->setCommande($commande);
                 $commande->addLigneCommande($ligneCommande);
+                $commande->setDate(new \DateTime('now'));
+                $commande->setEtat('en cours de préparation');
+                $em->persist($ligneCommande);
             }
+            $em->persist($commande);
+            $em->flush();
+            $panier->viderPanier();
+            return $this->render('mi06VitrineBundle:Panier:validationPanier.html.twig',
+                array('commande' => $commande));
+         
+        }
+        else {
+            return $this->redirect($this->generateUrl('mi06_panier'));
         }
     }
 }

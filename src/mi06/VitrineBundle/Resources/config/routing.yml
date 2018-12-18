@@ -33,3 +33,15 @@ mi06_vider_panier:
 mi06_validation_panier:
     path:     /validationPanier/
     defaults: { _controller: mi06VitrineBundle:Panier:validationPanier}
+
+mi06_validation_panier:
+    path:     /validationPanier/
+    defaults: { _controller: mi06VitrineBundle:Panier:validationPanier}
+
+mi06_client_login:
+    path:     /login
+    defaults: { _controller: "mi06VitrineBundle:Client:login" }
+    methods:  [GET, POST]
+
+mi06_client_logout:
+    path:     /logout

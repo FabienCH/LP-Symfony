@@ -2,10 +2,15 @@
 {% block content %}
     <h1>Client creation</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+    {{ form_start(newClient) }}
+        {{ form_widget(newClient) }}
+        <input type="submit" value="Créer mon compte" />
+    {{ form_end(newClient) }}
+
+    {{ form_start(login) }}
+        {{ form_widget(login) }}
+        <input type="submit" value="Me connecter" />
+    {{ form_end(login) }}
 
     <ul>
         <li>

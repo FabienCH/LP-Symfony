@@ -1,11 +1,12 @@
 <?php
 
 namespace mi06\VitrineBundle\Entity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Client
  */
-class Client
+class Client implements UserInterface, \Serializable
 {
     /**
      * @var integer
@@ -158,6 +159,31 @@ class Client
     
     public function __toString()
     { 
-        return $this->getEmail(); 
+        return $this->getNom(); 
+    }
+
+    public function getUsername() {
+        return $this->email; // l'email est utilisé comme login
+    }
+
+    public function getSalt() {
+        return null; // inutile avec l’encryptage choisi
+    }
+
+    public function getRoles() {
+        if ($this->isAdministrateur()) // Si le client est administrateur
+            return array('ROLE_ADMIN'); // on lui accorde le rôle ADMIN
+        else
+            return array('ROLE_USER'); // sinon le rôle USER
+    }
+
+    public function eraseCredentials(){}
+
+    public function serialize() { // pour pouvoir sérialiser le Client en session
+        return serialize(array($this->nom, $this->email, $this->password, $this->commande));
+    }
+
+    public function unserialize($serialized) {
+        list ($this->id, $this->email, $this->password, $this->commande) = unserialize($serialized);
     }
 }

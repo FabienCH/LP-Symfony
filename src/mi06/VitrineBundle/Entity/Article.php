@@ -184,4 +184,9 @@ class Article
     {
         return $this->articleCategorie;
     }
+    
+    public function __toString()
+    { 
+        return $this->getLibelle(); 
+    }
 }

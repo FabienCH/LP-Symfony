@@ -1,0 +1,15 @@
+{% extends "mi06VitrineBundle::layout.html.twig" %}
+{% block content %}
+    <div class="col-lg-9">
+        <h1>Votre commande {{ commande.id }} a bien été passée</h1>
+        <div class="col-lg-12">
+            <ul class="list-group">
+                {% for ligneCommande in commande.ligneCommande %}
+                    <li class="list-group-item">{{ ligneCommande.article }} {{ ligneCommande.articlePrix }} x {{ ligneCommande.quantite }}</li>
+                {% endfor %}
+            </ul>       
+        <!-- /.row -->
+        </div>
+    </div>
+    <!-- /.col-lg-9 -->
+{% endblock %}

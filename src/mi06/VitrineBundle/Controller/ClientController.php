@@ -5,6 +5,10 @@ namespace mi06\VitrineBundle\Controller;
 use mi06\VitrineBundle\Entity\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Client controller.
@@ -12,43 +16,52 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ClientController extends Controller
 {
-    /**
-     * Lists all client entities.
-     *
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
 
-        $clients = $em->getRepository('mi06VitrineBundle:Client')->findAll();
-
-        return $this->render('client/index.html.twig', array(
-            'clients' => $clients,
-        ));
-    }
 
     /**
      * Creates a new client entity.
      *
      */
-    public function newAction(Request $request)
+    public function loginAction(Request $request)
     {
         $client = new Client();
-        $form = $this->createForm('mi06\VitrineBundle\Form\ClientType', $client);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        $newClient = $this->createForm('mi06\VitrineBundle\Form\ClientType', $client);
+        $newClient->handleRequest($request);
+        if ($newClient->isSubmitted() && $newClient->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $encoder = $this->container->get('security.password_encoder');
+            $encoded = $encoder->encodePassword($client, $client->getPassword());
+            $client->setPassword($encoded);
             $em->persist($client);
             $em->flush();
             $session = $request->getSession();
             $session->set('clientId', $client->getId());
-            return $this->redirectToRoute('client_show', array('id' => $client->getId()));
+            return $this->redirectToRoute('/');
+        }
+
+        $login = $this->createFormBuilder($client)
+            ->setAction($this->generateUrl('mi06_client_login'))
+            ->add('email', EmailType::class)
+            ->add('password', PasswordType::class)
+            ->getForm();
+        if ($login->isSubmitted()) {
+            $em = $this->getDoctrine()->getManager();
+            $encoder = $this->container->get('security.password_encoder');
+            $encoded = $encoder->encodePassword($client, $client->getPassword());
+            $client->setPassword($encoded);
+            $em->getRepository('mi06VitrineBundle:Client')->findBy(
+                array('name' => $client->getName(),
+                    'password' => $client->getPassword())
+                );
+            $session = $request->getSession();
+            $session->set('clientId', $client->getId());
+            return $this->redirectToRoute('/');
         }
 
         return $this->render('client/new.html.twig', array(
             'client' => $client,
-            'form' => $form->createView(),
+            'newClient' => $newClient->createView(),
+            'login' => $login->createView(),
         ));
     }
 
