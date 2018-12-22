@@ -33,3 +33,8 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+    mi06\VitrineBundle\Controller\:
+        resource: '../../src/mi06/VitrineBundle/Controller'
+        public: true
+        tags: ['controller.service_arguments']

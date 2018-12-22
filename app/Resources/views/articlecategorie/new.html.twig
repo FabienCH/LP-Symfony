@@ -1,0 +1,13 @@
+{% extends "mi06VitrineBundle::backoffice.layout.html.twig" %}
+{% block content %}
+    <h1>Nouvelle Catégorie</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input class="btn btn-default" type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <p>
+        <a href="{{ path('articlecategorie_index') }}">Retour</a>
+    </p>
+{% endblock %}

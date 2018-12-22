@@ -5,27 +5,22 @@ namespace mi06\VitrineBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class ClientType extends AbstractType
+class ArticleCategorieType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nom')->add('email')->add('password')
-        ->add('submit', SubmitType::class, array(
-            'label' => 'Create',
-            'attr'  => array('class' => 'btn btn-default'),
-        ));
+        $builder->add('intitule');
     }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'mi06\VitrineBundle\Entity\Client'
+            'data_class' => 'mi06\VitrineBundle\Entity\ArticleCategorie'
         ));
     }
 
@@ -34,7 +29,7 @@ class ClientType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'mi06_vitrinebundle_client';
+        return 'mi06_vitrinebundle_articlecategorie';
     }
 
 

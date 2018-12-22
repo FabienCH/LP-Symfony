@@ -1,20 +1,26 @@
 {% extends "mi06VitrineBundle::layout.html.twig" %}
 {% block content %}
-    <h1>Commande edit</h1>
+    <h1>Modification de Commande</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Date</th>
+                <td>{% if commande.date %}{{ commande.date|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Client</th>
+                <td>{{ commande.client }}</td>
+            </tr>
+        </tbody>
+    </table>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <input class="btn btn-default" type="submit" value="Edit" />
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('commande_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <p>
+        <a href="{{ path('commande_index') }}">Retour</a>
+    </p>
 {% endblock %}

@@ -97,4 +97,8 @@ class ArticleCategorie
     {
         return $this->article;
     }
+
+    public function __toString() {
+        return $this->getIntitule();
+    }
 }

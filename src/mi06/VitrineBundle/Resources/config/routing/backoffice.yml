@@ -1,0 +1,11 @@
+mi06_vitrine_articlecategorie:
+    resource: "@mi06VitrineBundle/Resources/config/routing/articlecategorie.yml"
+    prefix:   /articlecategorie
+
+mi06_vitrine_commande:
+    resource: "@mi06VitrineBundle/Resources/config/routing/commande.yml"
+    prefix:   /commande
+    
+mi06_vitrine_article:
+    resource: "@mi06VitrineBundle/Resources/config/routing/article.yml"
+    prefix:   /article

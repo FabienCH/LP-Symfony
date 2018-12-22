@@ -1,0 +1,18 @@
+mi06\VitrineBundle\Entity\Article:
+  properties:
+    libelle:
+      - NotBlank: ~
+    prix:
+      - NotBlank: ~
+
+mi06\VitrineBundle\Entity\ArticleCategorie:
+  properties:
+    intitule:
+      - NotBlank: ~
+
+mi06\VitrineBundle\Entity\Commande:
+  properties:
+    ligneCommande:
+      - NotBlank: ~
+    client:
+      - NotBlank: ~

@@ -1,0 +1,16 @@
+{% extends "mi06VitrineBundle::backoffice.layout.html.twig" %}
+{% block content %}
+    <h1>Modification de Catégorie</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input class="btn btn-default" type="submit" value="Edit" />
+    {{ form_end(edit_form) }}
+
+    <p>
+        <a href="{{ path('articlecategorie_index') }}">Retour</a><br/>
+        {{ form_start(delete_form) }}
+            <input class="btn btn-default" type="submit" value="Delete">
+        {{ form_end(delete_form) }}
+    </p>
+{% endblock %}

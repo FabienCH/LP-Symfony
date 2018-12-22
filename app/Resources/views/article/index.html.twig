@@ -1,0 +1,35 @@
+{% extends "mi06VitrineBundle::backoffice.layout.html.twig" %}
+{% block content %}
+    <h1>Liste des Articles</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Prix</th>
+                <th>Stock</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td><a href="{{ path('article_show', { 'id': article.id }) }}">{{ article.id }}</a></td>
+                <td>{{ article.libelle }}</td>
+                <td>{{ article.prix }}</td>
+                <td>{{ article.stock }}</td>
+                <td>
+                    <a href="{{ path('article_show', { 'id': article.id }) }}">show</a>
+                </td>
+                <td>
+                    <a href="{{ path('article_edit', { 'id': article.id }) }}">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('article_new') }}">Nouvel Article</a>
+ 
+{% endblock %}

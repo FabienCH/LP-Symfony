@@ -8,17 +8,7 @@ commande_show:
     defaults: { _controller: "mi06VitrineBundle:Commande:show" }
     methods:  GET
 
-commande_new:
-    path:     /new
-    defaults: { _controller: "mi06VitrineBundle:Commande:new" }
-    methods:  [GET, POST]
-
 commande_edit:
     path:     /{id}/edit
     defaults: { _controller: "mi06VitrineBundle:Commande:edit" }
     methods:  [GET, POST]
-
-commande_delete:
-    path:     /{id}/delete
-    defaults: { _controller: "mi06VitrineBundle:Commande:delete" }
-    methods:  DELETE

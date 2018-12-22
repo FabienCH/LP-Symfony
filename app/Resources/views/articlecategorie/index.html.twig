@@ -1,0 +1,31 @@
+{% extends "mi06VitrineBundle::backoffice.layout.html.twig" %}
+{% block content %}
+    <h1>Liste des catégories</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Intitule</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for articleCategorie in articleCategories %}
+            <tr>
+                <td><a href="{{ path('articlecategorie_show', { 'id': articleCategorie.id }) }}">{{ articleCategorie.id }}</a></td>
+                <td>{{ articleCategorie.intitule }}</td>
+                <td>
+                    <a href="{{ path('articlecategorie_show', { 'id': articleCategorie.id }) }}">show</a>
+                </td>
+                <td>
+                    <a href="{{ path('articlecategorie_edit', { 'id': articleCategorie.id }) }}">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <p><a href="{{ path('articlecategorie_new') }}">Nouvelle Categorie</a></p>
+
+{% endblock %}
