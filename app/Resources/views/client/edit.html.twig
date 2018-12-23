@@ -1,20 +1,13 @@
 {% extends "mi06VitrineBundle::layout.html.twig" %}
 {% block content %}
-    <h1>Client edit</h1>
+    <h1>Modification de mes informations</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <input class="btn btn-default" type="submit" value="Modifier" />
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('client_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <p>
+        <a class="btn btn-default" href="{{ path('client_index') }}">Retour</a>
+    </p>
 {% endblock %}

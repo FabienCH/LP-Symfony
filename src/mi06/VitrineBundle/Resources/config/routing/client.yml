@@ -4,7 +4,7 @@ client_index:
     methods:  GET
 
 client_show:
-    path:     /{id}/show
+    path:     /show
     defaults: { _controller: "mi06VitrineBundle:Client:show" }
     methods:  GET
 

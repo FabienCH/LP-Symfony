@@ -27,5 +27,6 @@ security:
                 target: /
     
     access_control:
-        - { path: ^/backoffice, roles: ROLE_USER }
-        - { path: ^/client, roles: ROLE_USER }
+        - { path: ^/backoffice, roles: ROLE_ADMIN }
+        - { path: ^/profil, roles: ROLE_USER }
+        - { path: ^/validationPanier, roles: ROLE_USER }

@@ -1,13 +1,9 @@
 {% extends "mi06VitrineBundle::layout.html.twig" %}
 {% block content %}
-    <h1>Client</h1>
+    <h1>Mon Profil</h1>
 
-    <table>
+    <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ client.id }}</td>
-            </tr>
             <tr>
                 <th>Nom</th>
                 <td>{{ client.nom }}</td>
@@ -16,24 +12,10 @@
                 <th>Email</th>
                 <td>{{ client.email }}</td>
             </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ client.password }}</td>
-            </tr>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('client_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('client_edit', { 'id': client.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <p>
+        <a href="{{ path('client_edit', { 'id': client.id }) }}">Modifier mes informations</a>
+    </p>
 {% endblock %}

@@ -15,7 +15,11 @@ mi06\VitrineBundle\Entity\Client:
         password:
             type: string
             length: 100
-            
+        
+        administrateur:
+            type: boolean
+            options:
+                default: false
     oneToMany:
         commande:
             targetEntity: Commande

@@ -6,6 +6,7 @@ use mi06\VitrineBundle\Entity\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
  * Client controller.
@@ -17,7 +18,8 @@ class ClientController extends Controller
     public function indexAction()
     {
         if($this->getUser()) {
-            return $this->redirectToRoute('mi06_vitrine_homepage');
+            return $this->render('client/show.html.twig', array(
+                'client' => $this->getUser()));
         }
         return $this->redirectToRoute('mi06_client_login');     
     }
@@ -82,8 +84,10 @@ class ClientController extends Controller
      */
     public function editAction(Request $request, Client $client)
     {
-        $deleteForm = $this->createDeleteForm($client);
-        $editForm = $this->createForm('mi06\VitrineBundle\Form\ClientType', $client);
+        $editForm = $this->createFormBuilder($client)
+        ->add('nom', TextType::class)
+        ->add('email', TextType::class)
+        ->getForm();
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -94,8 +98,7 @@ class ClientController extends Controller
 
         return $this->render('client/edit.html.twig', array(
             'client' => $client,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form' => $editForm->createView()
         ));
     }
 

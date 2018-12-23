@@ -29,6 +29,11 @@ class Client implements UserInterface, \Serializable
     private $password;
 
     /**
+     * @var boolean
+     */
+    private $administrateur;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $commande;
@@ -124,6 +129,26 @@ class Client implements UserInterface, \Serializable
     }
 
     /**
+     * Set administrateur
+     *
+     * @param string $administrateur
+     */
+    public function setAdministrateur()
+    {
+        $this->administrateur = true;
+    }
+
+    /**
+     * Is administrateur
+     *
+     * @return string
+     */
+    public function isAdministrateur()
+    {
+        return $this->administrateur;
+    }
+
+    /**
      * Add commande
      *
      * @param \mi06\VitrineBundle\Entity\Commande $commande
@@ -171,7 +196,10 @@ class Client implements UserInterface, \Serializable
     }
 
     public function getRoles() {
-            return array('ROLE_USER'); // sinon le rôle USER
+        if ($this->isAdministrateur()) // Si le client est administrateur
+        return array('ROLE_ADMIN'); // on lui accorde le rôle ADMIN
+        else
+        return array('ROLE_USER'); // sinon le rôle USER
     }
 
     public function eraseCredentials(){}

@@ -1,3 +1,7 @@
+mi06_vitrine_home_backoffice:
+    path:     /
+    defaults: { _controller: mi06VitrineBundle:ArticleCategorie:index }
+    
 mi06_vitrine_articlecategorie:
     resource: "@mi06VitrineBundle/Resources/config/routing/articlecategorie.yml"
     prefix:   /articlecategorie

@@ -1,6 +1,6 @@
 mi06_vitrine_client:
     resource: "@mi06VitrineBundle/Resources/config/routing/client.yml"
-    prefix:   /client
+    prefix:   /profil
 
 mi06_vitrine_commande:
     resource: "@mi06VitrineBundle/Resources/config/routing/commande.yml"
@@ -11,7 +11,7 @@ mi06_vitrine_backoffice:
     prefix:   /backoffice
 
 mi06_vitrine_homepage:
-    path:     /accueil/{name}
+    path:     /
     defaults: { _controller: mi06VitrineBundle:Default:index, name: Visiteur }
     
 mi06_vitrine_catalogue:
