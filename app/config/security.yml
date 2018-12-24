@@ -23,10 +23,10 @@ security:
                 login_path: mi06_client_login
                 check_path: mi06_client_login
             logout:
-                path: /logout
-                target: /
+                path: mi06_client_logout
+                target: mi06_vitrine_homepage
     
     access_control:
-        - { path: ^/backoffice, roles: ROLE_ADMIN }
-        - { path: ^/profil, roles: ROLE_USER }
-        - { path: ^/validationPanier, roles: ROLE_USER }
+        - { path: "^/[a-z]{2}/backoffice", roles: ROLE_ADMIN }
+        - { path: "^/[a-z]{2}/profil", roles: ROLE_USER }
+        - { path: "^/[a-z]{2}/validationPanier", roles: ROLE_USER }

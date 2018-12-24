@@ -1,3 +1,11 @@
+mi06_vitrine_homepage:
+    path:     /
+    defaults: { _controller: mi06VitrineBundle:Default:index, name: Visiteur }
+
+mi06_vitrine_local:
+    path:     /local/{newLocal}
+    defaults: { _controller: mi06VitrineBundle:Default:setLocal, newLocal: en }
+
 mi06_vitrine_client:
     resource: "@mi06VitrineBundle/Resources/config/routing/client.yml"
     prefix:   /profil
@@ -10,10 +18,6 @@ mi06_vitrine_backoffice:
     resource: "@mi06VitrineBundle/Resources/config/routing/backoffice.yml"
     prefix:   /backoffice
 
-mi06_vitrine_homepage:
-    path:     /
-    defaults: { _controller: mi06VitrineBundle:Default:index, name: Visiteur }
-    
 mi06_vitrine_catalogue:
     path:     /catalogue/
     defaults: { _controller: mi06VitrineBundle:Default:catalogue }

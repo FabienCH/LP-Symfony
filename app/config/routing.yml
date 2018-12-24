@@ -1,6 +1,15 @@
 mi06_vitrine:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: mi06_vitrine_homepage
+        permanent: true
+
+mi06_vitrine_local:
     resource: "@mi06VitrineBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /{_locale}/
+    requirements:
+        _locale: fr|en
 
 app:
     resource: '@AppBundle/Controller/'

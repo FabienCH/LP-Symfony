@@ -3,6 +3,7 @@
 namespace mi06\VitrineBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -33,5 +34,12 @@ class DefaultController extends Controller
     public function mentionsAction()
     {
         return $this->render('mi06VitrineBundle:Default:mentions.html.twig');
+    }
+
+    public function setLocalAction(Request $request, $newLocal)
+    {
+        return $this->redirectToRoute('mi06_vitrine_homepage', array(
+            '_locale' => $newLocal,
+        ));
     }
 }

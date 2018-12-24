@@ -7,7 +7,7 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: %default_locale%
 
 framework:
     templating:
@@ -22,7 +22,6 @@ framework:
     csrf_protection: ~
     validation: { enable_annotations: true }
     #serializer: { enable_annotations: true }
-    default_locale: '%locale%'
     trusted_hosts: ~
     session:
         # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
@@ -33,6 +32,9 @@ framework:
     assets: ~
     php_errors:
         log: true
+    # Langue par défaut pour le service de traduction
+    translator: { fallback: [%locale%] }
+    # Langue par défaut de l'utilisateur
 
 # Twig Configuration
 twig:

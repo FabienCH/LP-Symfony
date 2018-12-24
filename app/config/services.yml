@@ -38,3 +38,4 @@ services:
         resource: '../../src/mi06/VitrineBundle/Controller'
         public: true
         tags: ['controller.service_arguments']
+    

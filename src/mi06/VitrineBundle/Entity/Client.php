@@ -133,9 +133,9 @@ class Client implements UserInterface, \Serializable
      *
      * @param string $administrateur
      */
-    public function setAdministrateur()
+    public function setAdministrateur($isAdministrateur)
     {
-        $this->administrateur = true;
+        $this->administrateur = $isAdministrateur;
     }
 
     /**

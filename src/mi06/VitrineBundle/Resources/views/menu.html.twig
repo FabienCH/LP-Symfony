@@ -1,5 +1,5 @@
 <div class="list-group">
-    <a href="/" class="list-group-item">Accueil</a>
-    <a href="/catalogue" class="list-group-item">Catalogue</a>
-    <a href="/mentions" class="list-group-item">Mentions Légales</a>
+    <a href="{{ path('mi06_vitrine') }}" class="list-group-item">{{ 'mi06.vitrine.menu.home'|trans }}</a>
+    <a href="{{ path('mi06_vitrine_catalogue') }}" class="list-group-item">{{ 'mi06.vitrine.menu.catalog'|trans }}</a>
+    <a href="{{ path('mi06_vitrine_mentions') }}" class="list-group-item">{{ 'mi06.vitrine.menu.legal'|trans }}</a>
 </div>

@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use mi06\VitrineBundle\Entity\Panier;
 use mi06\VitrineBundle\Entity\LigneCommande;
 use mi06\VitrineBundle\Entity\Commande;
+use mi06\VitrineBundle\Service\MontantPanier;
 
 class PanierController extends Controller
 {   
@@ -15,15 +16,10 @@ class PanierController extends Controller
         $session = $request->getSession();
         if($session->has('panier') && !empty($session->get('panier')->getContenu()))
         {
+            $montantPanierService = $this->get('montant_panier');
             $panier = $session->get('panier');
-            $totalPanier = 0;
-            $articles = [];
-            foreach($panier->getContenu() as $idArticle => $quantité) {
-                $em = $this->getDoctrine()->getManager();
-                $article = $em->getRepository('mi06VitrineBundle:Article')->find($idArticle);
-                array_push($articles, $article);
-                $totalPanier += $article->getPrix() * $quantité; 
-            }
+            $totalPanier = $montantPanierService->getMontant($panier);
+            $articles = $montantPanierService->getArticles($panier);
             
             return $this->render('mi06VitrineBundle:Panier:contenuPanier.html.twig',
             array('panier' => $panier,
@@ -42,13 +38,9 @@ class PanierController extends Controller
         $session = $request->getSession();
         if($session->has('panier') && !empty($session->get('panier')->getContenu()))
         {
+            $montantPanierService = $this->get('montant_panier');
             $panier = $session->get('panier');
-            $totalPanier = 0;
-            foreach($panier->getContenu() as $idArticle => $quantité) {
-                $em = $this->getDoctrine()->getManager();
-                $article = $em->getRepository('mi06VitrineBundle:Article')->find($idArticle);
-                $totalPanier += $article->getPrix() * $quantité; 
-            }
+            $totalPanier = $montantPanierService->getMontant($panier);
             
             return $this->render('mi06VitrineBundle:Panier:contenuPanierAside.html.twig',
             array('nbArticles' => count($panier->getContenu()),

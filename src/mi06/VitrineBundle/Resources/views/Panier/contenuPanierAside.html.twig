@@ -1,11 +1,11 @@
-<h3>Votre panier</h3>
+<h3>{{ 'mi06.vitrine.basket.title'|trans }}</h3>
 <div class="col-lg-12">
     {% if nbArticles %}
-        <p>Nombres d'articles : {{ nbArticles }}<p>
-        <p>Montant : {{ totalPanier }}<p>
-        <p><a href="/panier">Voir panier</a><p>
+        <p>{{ 'mi06.vitrine.basket.article'|trans }}{{ nbArticles }}<p>
+        <p>{{ 'mi06.vitrine.basket.amount'|trans }}{{ totalPanier }}<p>
+        <p><a href="{{ path('mi06_panier') }}">{{ 'mi06.vitrine.basket.see'|trans }}</a><p>
     {% else %}
-        <p>Votre panier est vide<p>
+        <p>{{ 'mi06.vitrine.basket.empty'|trans }}<p>
     {% endif %}           
 <!-- /.row -->
 </div>

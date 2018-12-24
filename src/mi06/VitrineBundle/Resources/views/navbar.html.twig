@@ -1,32 +1,38 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="/">C Discount++ </a>
+        <a class="navbar-brand" href="{{ path('mi06_vitrine_homepage')}}">C Discount++ </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                  {% if is_granted("ROLE_ADMIN") %}
-                 <li class="nav-item">
-                    <a class="nav-link" href="/backoffice">Back Office</a>
-                </li>
-            {% endif %}  
-                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                 <li class="nav-item">
-                    <a class="nav-link" href="/profil">Profil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout">Se Déconnecter</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Se connecter</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/create">Créer mon compte</a>
-                </li>
-            {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('mi06_vitrine_home_backoffice')}}">Back Office</a>
+                    </li>
+                {% endif %}  
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('client_index')}}">{{ 'mi06.vitrine.nav.profil'|trans }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('mi06_client_logout')}}">{{ 'mi06.vitrine.nav.logout'|trans }}</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('mi06_client_login')}}">{{ 'mi06.vitrine.nav.login'|trans }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('mi06_client_create')}}">{{ 'mi06.vitrine.nav.signin'|trans }}</a>
+                    </li>
+                {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('mi06_vitrine_local', { 'newLocal': 'en' }) }}">EN</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('mi06_vitrine_local', { 'newLocal': 'fr' }) }}">FR</a>
+                    </li>
             </ul>
         </div>
     </div>

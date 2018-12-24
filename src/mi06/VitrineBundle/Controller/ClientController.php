@@ -51,6 +51,7 @@ class ClientController extends Controller
             $encoder = $this->container->get('security.password_encoder');
             $encoded = $encoder->encodePassword($client, $client->getPassword());
             $client->setPassword($encoded);
+            $client->setAdministrateur(false);
             $em->persist($client);
             $em->flush();
             $session = $request->getSession();

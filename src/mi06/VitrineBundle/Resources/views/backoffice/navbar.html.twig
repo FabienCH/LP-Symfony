@@ -1,7 +1,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="/">C Discount++ </a>
+        <a class="navbar-brand" href="{{ path('mi06_vitrine_homepage')}}">C Discount++ </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -9,22 +9,22 @@
             <ul class="navbar-nav ml-auto">
                  {% if is_granted("ROLE_ADMIN") %}
                  <li class="nav-item">
-                    <a class="nav-link" href="/">Front Office</a>
+                    <a class="nav-link" href="{{ path('mi06_vitrine_homepage')}}">Front Office</a>
                 </li>
             {% endif %}  
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                  <li class="nav-item">
-                    <a class="nav-link" href="/profil">Profil</a>
+                    <a class="nav-link" href="{{ path('client_index')}}">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">Se Déconnecter</a>
+                    <a class="nav-link" href="{{ path('mi06_client_logout')}}">Se Déconnecter</a>
                 </li>
             {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Se connecter</a>
+                    <a class="nav-link" href="{{ path('mi06_client_login')}}">Se connecter</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/create">Créer mon compte</a>
+                    <a class="nav-link" href="{{ path('mi06_client_create')}}">Créer mon compte</a>
                 </li>
             {% endif %}
             </ul>

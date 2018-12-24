@@ -9,7 +9,7 @@
                     <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="/articlesParCategorie/{{ categorie.id }}">{{ categorie.intitule }}</a>
+                            <a href="{{ path('mi06_articles_caterorie', { 'id': categorie.id }) }}">{{ categorie.intitule }}</a>
                         </h4>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
                     </div>
