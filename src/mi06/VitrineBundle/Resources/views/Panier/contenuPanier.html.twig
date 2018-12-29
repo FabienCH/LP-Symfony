@@ -4,12 +4,25 @@
         <h1>Votre panier</h1>
         <div class="col-lg-12">
             {% if panier %}
-                <ul class="list-group">
-                    {% for article in articles %}
-                        <li class="list-group-item">{{ article.libelle }} {{ article.prix }} {{ panier.contenu[article.id] }}</li>
-                    {% endfor %}
-                </ul>
-                <p>Total : {{ totalPanier }}<p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Article</th>
+                        <th>Prix</th>
+                        <th>Quantité</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for article in articles %}
+                    <tr>
+                        <td>{{ article.libelle }}</td>
+                        <td>{{ article.prix }}</td>
+                        <td>{{ panier.contenu[article.id] }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+                <p>Total : {{ totalPanier }} €<p>
                 <p><a href="{{ path('mi06_validation_panier') }}">Commander</a><p>
                 <p><a href="{{ path('mi06_vider_panier') }}">Vider le panier</a><p>
             {% else %}

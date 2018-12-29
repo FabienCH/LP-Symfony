@@ -16,6 +16,7 @@ class CommandeController extends Controller
     /**
      * Lists all commande entities.
      *
+     * @param Request $request The HHTP request
      */
     public function indexAction(Request $request)
     {
@@ -29,8 +30,9 @@ class CommandeController extends Controller
     }
 
     /**
-     * Lists all commande entities.
+     * Lists all commande of a client.
      *
+     * @param Request $request The HHTP request
      */
     public function mesCommandesAction(Request $request)
     {
@@ -48,7 +50,8 @@ class CommandeController extends Controller
 
     /**
      * Finds and displays a commande entity.
-     *
+     * 
+     * @param Commande $commande The Commande entity
      */
     public function showAction(Commande $commande)
     {
@@ -60,6 +63,8 @@ class CommandeController extends Controller
     /**
      * Displays a form to edit an existing commande entity.
      *
+     * @param Request $request The HHTP request
+     * @param Commande $commande The Commande entity
      */
     public function editAction(Request $request, Commande $commande)
     {        

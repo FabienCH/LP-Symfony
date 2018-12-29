@@ -5,21 +5,24 @@ namespace mi06\VitrineBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use mi06\VitrineBundle\Entity\Panier;
-use mi06\VitrineBundle\Entity\LigneCommande;
-use mi06\VitrineBundle\Entity\Commande;
-use mi06\VitrineBundle\Service\MontantPanier;
+use mi06\VitrineBundle\Service\PanierService;
 
 class PanierController extends Controller
 {   
+    /**
+     * Get and display basket content.
+     *
+     * @param Request $request The HHTP request
+     */
     public function contenuPanierAction(Request $request)
     {
         $session = $request->getSession();
         if($session->has('panier') && !empty($session->get('panier')->getContenu()))
         {
-            $montantPanierService = $this->get('montant_panier');
+            $panierService = $this->get('panier_service');
             $panier = $session->get('panier');
-            $totalPanier = $montantPanierService->getMontant($panier);
-            $articles = $montantPanierService->getArticles($panier);
+            $totalPanier = $panierService->getMontant($panier);
+            $articles = $panierService->getArticles($panier);
             
             return $this->render('mi06VitrineBundle:Panier:contenuPanier.html.twig',
             array('panier' => $panier,
@@ -33,14 +36,19 @@ class PanierController extends Controller
         }
     }
     
+    /**
+     * Get and display basket content on the side.
+     *
+     * @param Request $request The HHTP request
+     */
     public function contenuPanierAsideAction(Request $request)
     {
         $session = $request->getSession();
         if($session->has('panier') && !empty($session->get('panier')->getContenu()))
         {
-            $montantPanierService = $this->get('montant_panier');
+            $panierService = $this->get('panier_service');
             $panier = $session->get('panier');
-            $totalPanier = $montantPanierService->getMontant($panier);
+            $totalPanier = $panierService->getMontant($panier);
             
             return $this->render('mi06VitrineBundle:Panier:contenuPanierAside.html.twig',
             array('nbArticles' => count($panier->getContenu()),
@@ -53,6 +61,13 @@ class PanierController extends Controller
         }
     }
     
+    /**
+     * Add an article in the basket.
+     *
+     * @param Request $request The HHTP request
+     * @param int $idArticle The id of the article to add
+     * @param int $quantite The quantity to add
+     */
     public function ajoutArticleAction(Request $request, int $idArticle, int $quantite)
     {
         $panier = new Panier;
@@ -60,48 +75,49 @@ class PanierController extends Controller
         if($session->has('panier'))
         {
             $panier = $session->get('panier');
-        }  
+        } 
         $panier->ajoutArticle($idArticle, $quantite);
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository('mi06VitrineBundle:Article')->find($idArticle);
+        $article->setStock($article->getStock() - 1);
+        $em->flush();
         $session->set('panier', $panier);
         return $this->redirect($this->generateUrl('mi06_panier'));
     }
  
+    /**
+     * Empty the basket.
+     *
+     * @param Request $request The HHTP request
+     */
     public function viderPanierAction(Request $request)
     {
-        $panier = new Panier;
         $session = $request->getSession();
+        if($session->has('panier') && !empty($session->get('panier')->getContenu()))
+        {
+            $panier = $session->get('panier');
+            $panierService = $this->get('panier_service');
+            $panierService->updateStock($panier);     
+        }
+        $panier = new Panier;
         $panier->viderPanier();
         $session->set('panier', $panier);
-        return $this->redirect($this->generateUrl('mi06_panier'));
+        return $this->redirect($this->generateUrl('mi06_vitrine_homepage'));
     }
     
+    /**
+     * Validate the basket and pass order.
+     *
+     * @param Request $request The HHTP request
+     */
     public function validationPanierAction(Request $request)
     {
         $session = $request->getSession();
-        $session->set('clientId', 1);
-        if($session->has('panier') && $session->has('clientId') && !empty($session->get('panier')->getContenu()))
+        if($session->has('panier') && !empty($session->get('panier')->getContenu()))
         {
-            $em = $this->getDoctrine()->getManager();
             $panier = $session->get('panier');
-            $commande = new Commande();
-            $client = $em->getRepository('mi06VitrineBundle:Client')->find($session->get('clientId'));
-            $commande->setClient($client);
-            $em = $this->getDoctrine()->getManager();
-            foreach ($panier->getContenu() as $articleId => $quantite) {
-                $ligneCommande = new LigneCommande();
-                $article = $em->getRepository('mi06VitrineBundle:Article')->find($articleId);
-                $ligneCommande->setArticlePrix($article->getPrix());
-                $ligneCommande->setQuantite($quantite);
-                $ligneCommande->setArticle($article);
-                $ligneCommande->setCommande($commande);
-                $commande->addLigneCommande($ligneCommande);
-                $commande->setDate(new \DateTime('now'));
-                $commande->setEtat('en cours de préparation');
-                $em->persist($ligneCommande);
-            }
-            $em->persist($commande);
-            $em->flush();
-            $panier->viderPanier();
+            $panierService = $this->get('panier_service');
+            $commande =  $panierService->passerCommande($this->getUser(), $panier);
             return $this->render('mi06VitrineBundle:Panier:validationPanier.html.twig',
                 array('commande' => $commande));
          

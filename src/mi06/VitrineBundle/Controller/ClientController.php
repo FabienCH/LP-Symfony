@@ -18,8 +18,15 @@ class ClientController extends Controller
     public function indexAction()
     {
         if($this->getUser()) {
+            $em = $this->getDoctrine()->getManager();
+            dump($this->getUser());
+            $em->getConfiguration()->setSQLLogger(new \Doctrine\DBAL\Logging\EchoSQLLogger);
+            $commandes = $em->getRepository('mi06VitrineBundle:Commande')->findBy(['client' => $this->getUser()]);
+            dump($commandes);
             return $this->render('client/show.html.twig', array(
-                'client' => $this->getUser()));
+                'client' => $this->getUser(),
+                'commandes' => $commandes,
+            ));
         }
         return $this->redirectToRoute('mi06_client_login');     
     }
@@ -71,11 +78,12 @@ class ClientController extends Controller
      */
     public function showAction(Client $client)
     {
-        $deleteForm = $this->createDeleteForm($client);
-
+        $em = $this->getDoctrine()->getManager();
+        $commandes = $em->getRepository('mi06VitrineBundle:Commande')->findBy(['client' => $client]);
+        dump($commandes);
         return $this->render('client/show.html.twig', array(
             'client' => $client,
-            'delete_form' => $deleteForm->createView(),
+            'commandes' => $commandes,
         ));
     }
 

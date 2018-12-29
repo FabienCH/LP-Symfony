@@ -30,6 +30,7 @@ class ArticleController extends Controller
     /**
      * Creates a new article entity.
      *
+     * @param Request $request The HHTP request
      */
     public function newAction(Request $request)
     {
@@ -54,6 +55,7 @@ class ArticleController extends Controller
     /**
      * Finds and displays a article entity.
      *
+     * @param Article $article The Article entity
      */
     public function showAction(Article $article)
     {
@@ -67,7 +69,9 @@ class ArticleController extends Controller
 
     /**
      * Displays a form to edit an existing article entity.
-     *
+     * 
+     * @param Request $request The HHTP request
+     * @param Article $article The Article entity
      */
     public function editAction(Request $request, Article $article)
     {
@@ -91,6 +95,8 @@ class ArticleController extends Controller
     /**
      * Deletes a article entity.
      *
+     * @param Request $request The HHTP request
+     * @param Article $article The Article entity
      */
     public function deleteAction(Request $request, Article $article)
     {
@@ -122,6 +128,11 @@ class ArticleController extends Controller
         ;
     }
 
+    /**
+     * Finds and displays the most sold articles.
+     *
+     * @param int $max The number of artcile to display
+     */
     public function plusVendusAction($max = 3)
     {
         $em = $this->getDoctrine()->getRepository('mi06VitrineBundle:LigneCommande');

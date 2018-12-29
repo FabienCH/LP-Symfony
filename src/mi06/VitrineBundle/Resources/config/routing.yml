@@ -4,7 +4,7 @@ mi06_vitrine_homepage:
 
 mi06_vitrine_local:
     path:     /local/{newLocal}
-    defaults: { _controller: mi06VitrineBundle:Default:setLocal, newLocal: en }
+    defaults: { _controller: mi06VitrineBundle:Default:setLocal}
 
 mi06_vitrine_client:
     resource: "@mi06VitrineBundle/Resources/config/routing/client.yml"

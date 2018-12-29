@@ -30,6 +30,7 @@ class ArticleCategorieController extends Controller
     /**
      * Creates a new articleCategorie entity.
      *
+     * @param Request $request The HHTP request
      */
     public function newAction(Request $request)
     {
@@ -54,6 +55,7 @@ class ArticleCategorieController extends Controller
     /**
      * Finds and displays a articleCategorie entity.
      *
+     * @param ArticleCategorie $articleCategorie The articleCategorie entity
      */
     public function showAction(ArticleCategorie $articleCategorie)
     {
@@ -68,6 +70,8 @@ class ArticleCategorieController extends Controller
     /**
      * Displays a form to edit an existing articleCategorie entity.
      *
+     * @param Request $request The HHTP request
+     * @param ArticleCategorie $articleCategorie The articleCategorie entity
      */
     public function editAction(Request $request, ArticleCategorie $articleCategorie)
     {
@@ -91,6 +95,8 @@ class ArticleCategorieController extends Controller
     /**
      * Deletes a articleCategorie entity.
      *
+     * @param Request $request The HHTP request
+     * @param ArticleCategorie $articleCategorie The articleCategorie entity
      */
     public function deleteAction(Request $request, ArticleCategorie $articleCategorie)
     {

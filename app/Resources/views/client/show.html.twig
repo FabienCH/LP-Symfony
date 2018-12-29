@@ -2,6 +2,7 @@
 {% block content %}
     <h1>Mon Profil</h1>
 
+    <h2>Mes informations</h2>
     <table class="table">
         <tbody>
             <tr>
@@ -14,8 +15,29 @@
             </tr>
         </tbody>
     </table>
-
     <p>
         <a href="{{ path('client_edit', { 'id': client.id }) }}">Modifier mes informations</a>
     </p>
+
+    <h2>Mes commandes</h2>
+     {% if commandes %}
+         <table class="table">
+            <tbody>
+                <tr>
+                    <th>Numéro</th>
+                    <th>Date de commande</th>
+                    <th>Etat</th>
+                </tr>
+                {% for commande in commandes %}
+                    <tr>
+                        <td> {{ commande.id }} </td>
+                        <td> {{ commande.date|date('Y-m-d') }} </td>
+                        <td> {{ commande.etat }} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p>Vous n'avez aucune commande<p>
+        {% endif %}  
 {% endblock %}

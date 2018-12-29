@@ -13,10 +13,9 @@
                         </h4>
                         <h5>{{ article.prix }} €</h5>
                         <p class="card-text">stock : {{ article.stock }}</p>
-                        <p class="card-text"><a href="{{ path('mi06_ajout_article', {'idArticle': article.id, 'quantite': 1}) }}">ajouter au panier</a></p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    {% if article.stock %}
+                        <p class="card-text"><a href="{{ path('mi06_ajout_article', {'idArticle': article.id, 'quantite': 1}) }}">{{ 'mi06.vitrine.addBasket'|trans }}</a></p>
+                    {% endif %}                    
                     </div>
                 </div>
             </div>
