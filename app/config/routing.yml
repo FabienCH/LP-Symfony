@@ -1,3 +1,7 @@
+soap:
+    resource: "@SoapBundle/Resources/config/routing.yml"
+    prefix:   /
+
 mi06_vitrine:
     path: /
     defaults:
@@ -8,6 +12,12 @@ mi06_vitrine:
 mi06_vitrine_local:
     resource: "@mi06VitrineBundle/Resources/config/routing.yml"
     prefix:   /{_locale}/
+    requirements:
+        _locale: fr|en
+
+mi06_soap:
+    resource: "@SoapBundle/Resources/config/routing.yml"
+    prefix:   /api/
     requirements:
         _locale: fr|en
 

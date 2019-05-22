@@ -1,0 +1,7 @@
+soap_homepage:
+    path:     /
+    defaults: { _controller: SoapBundle:Default:index }
+
+soap_wsgen:
+    path:     /WSGen
+    defaults: { _controller: SoapBundle:WSGen:WSGen }
