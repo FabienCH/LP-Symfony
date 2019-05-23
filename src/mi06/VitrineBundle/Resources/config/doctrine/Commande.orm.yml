@@ -1,6 +1,6 @@
 mi06\VitrineBundle\Entity\Commande:
     type: entity
-    table: commannde
+    table: commande
     id:
         id:
             type: integer

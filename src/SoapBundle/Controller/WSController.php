@@ -11,7 +11,7 @@ class WSController extends AbstractController
     /**
      * @Route("/api")
      */
-    public function index()
+    public function indexAction()
     {
         $soapServer = new \SoapServer('articleWS.wsdl');
         $soapServer->setObject(new SoapService());
@@ -29,17 +29,10 @@ class WSController extends AbstractController
     /**
      * @Route("/api/randomArticle")
      */
-    public function randomArticle()
+    public function randomArticleAction()
     {
-        $soapServer = new \SoapServer('articleWS.wsdl');
-        $soapServer->setObject(new SoapService());
-
-        $response = new Response();
-        $response->headers->set('Content-Type', 'text/xml; charset=ISO-8859-1');
-
-        ob_start();
-        $soapServer->handle();
-        $response->setContent(ob_get_clean());
+        $service = $this->container->get('soap_service');
+        $response = $service->articleRandom();
 
         return $response;
     }
@@ -47,7 +40,7 @@ class WSController extends AbstractController
     /**
      * @Route("/api/top3Article")
      */
-    public function top3Article()
+    public function top3ArticleAction($max)
     {
         $soapServer = new \SoapServer('articleWS.wsdl');
         $soapServer->setObject(new SoapService());

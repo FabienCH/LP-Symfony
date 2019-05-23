@@ -1,7 +1,15 @@
 soap_homepage:
-    path:     /
-    defaults: { _controller: SoapBundle:Default:index }
+    path:     /api
+    defaults: { _controller: SoapBundle:WS:index }
 
 soap_wsgen:
     path:     /WSGen
     defaults: { _controller: SoapBundle:WSGen:WSGen }
+
+soap_random_article:
+    path:     /randomArticle
+    defaults: { _controller: SoapBundle:WS:randomArticle }
+
+soap_top_article:
+    path:     /top3Article
+    defaults: { _controller: SoapBundle:WS:top3Article }

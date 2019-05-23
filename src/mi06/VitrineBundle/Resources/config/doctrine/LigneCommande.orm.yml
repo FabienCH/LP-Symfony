@@ -1,6 +1,6 @@
 mi06\VitrineBundle\Entity\LigneCommande:
     type: entity
-    table: ligneCommannde
+    table: lignecommande
     repositoryClass: mi06\VitrineBundle\Repository\LigneCommandeRepository 
     id:
         commande:
