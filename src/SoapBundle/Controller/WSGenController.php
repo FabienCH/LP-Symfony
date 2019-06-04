@@ -12,11 +12,12 @@ use mi06\VitrineBundle\Entity\Article;
 class WSGenController extends AbstractController {
     /**
      * @Route("api/WSGen")
+     * @return Response
      */
     public function WSGenAction() {
         $autodiscover = new AutoDiscover(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence());
         $autodiscover->setClass('SoapBundle\Service\SoapService')
-            ->setUri('http://localhost:8000/artcileWS');
+            ->setUri('http://localhost:8000/api');
         header('Content-type: application/wsdl+xml');
         $wsdl = $autodiscover->generate();
         $wsdl->dump("articleWS.wsdl");

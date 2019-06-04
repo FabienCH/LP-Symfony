@@ -20,27 +20,13 @@ class SoapService
 
     /**
      * Finds and return a random article.
-     * @return Article Random article
+     * @return mi06\VitrineBundle\Entity\Article Random article
      */
     public function articleRandom()
     {
         $articles =  $this->em->getRepository('mi06VitrineBundle:Article')->findAll();
         $id = rand(0, count($articles) - 1);
-        return $articles[$i];
-
-        /*$jsonArticle = json_encode([
-            "id" => $articles[$id]->getId(),
-            "libelle" => $articles[$id]->getLibelle(),
-            "prix" => $articles[$id]->getPrix(),
-            "stock" => $articles[$id]->getStock(),
-            "ligneArticle" => $articles[$id]->getLigneArticle(),
-            "articleCategorie" => $articles[$id]->getArticleCategorie()
-        ]);
-        dump($articles[$id]->getArticleCategorie());
-        dump($jsonArticle);
-        die;
-        return new JsonResponse($jsonArticle);*/
-        
+        return $articles[$id];
     }
 
     /**
@@ -58,7 +44,6 @@ class SoapService
          foreach($topArticlesQuantite as $topArticleQuantite) {
             array_push($topArticles, $em->getRepository('mi06VitrineBundle:Article')->find($topArticleQuantite["articleId"]));
         }
-        //return new JsonResponse(array('topArticlesQuantite' => $topArticlesQuantite, 'topArticles' => $topArticles));
         return $topArticles;  
     }
 }
