@@ -15,7 +15,7 @@ class WSGenController extends AbstractController {
      * @return Response
      */
     public function WSGenAction() {
-        $autodiscover = new AutoDiscover(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence());
+        $autodiscover = new AutoDiscover();
         $autodiscover->setClass('SoapBundle\Service\SoapService')
             ->setUri('http://localhost:8000/api');
         header('Content-type: application/wsdl+xml');

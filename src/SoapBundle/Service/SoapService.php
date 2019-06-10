@@ -6,6 +6,7 @@ use mi06\VitrineBundle\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Soap service.
@@ -14,7 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class SoapService
 {
     private $em;
-    public function __construct(\Doctrine\ORM\EntityManager $em) {
+    public function __construct(EntityManager $em) {
         $this->em = $em;
     }
 
@@ -22,7 +23,7 @@ class SoapService
      * Finds and return a random article.
      * @return mi06\VitrineBundle\Entity\Article Random article
      */
-    public function articleRandom()
+    public function randomArticle()
     {
         $articles =  $this->em->getRepository('mi06VitrineBundle:Article')->findAll();
         $id = rand(0, count($articles) - 1);

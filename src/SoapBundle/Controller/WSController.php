@@ -1,12 +1,13 @@
 <?php
 namespace SoapBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use SoapBundle\Service\SoapService;
+use SoapBundle\Service\HelloService;
 
-class WSController extends AbstractController
+class WSController extends Controller
 {
     /**
      * @Route("/api")
@@ -14,8 +15,9 @@ class WSController extends AbstractController
      */
     public function indexAction()
     {
+        $service = $this->get('soap_service');
         $soapServer = new \SoapServer('articleWS.wsdl');
-        $soapServer->setObject($this->container->get('soap_service'));
+        $soapServer->setObject($service);
 
         $response = new Response();
         $response->headers->set('Content-Type', 'text/xml; charset=ISO-8859-1');
@@ -29,25 +31,38 @@ class WSController extends AbstractController
 
     /**
      * @Route("/api/randomArticle")
-     * @return mi06\VitrineBundle\Entity\Article
+     * @return Response
      */
     public function randomArticleAction()
     {
-        $service = $this->container->get('soap_service');
-        $response = $service->articleRandom();
+        $service = $this->get('soap_service');
+        $soapServer = new \SoapServer('articleWS.wsdl');
+        $soapServer->setObject($service);
+
+        $response = new Response();
+        $response->headers->set('Content-Type', 'text/xml; charset=ISO-8859-1');
+
+        ob_start();
+        $soapServer->handle();
+        $response->setContent(ob_get_clean());
 
         return $response;
     }
 
     /**
-     * @Route("/api/top3Article")
-     * @param int
-     * @return array Top 3 articles
+     * @Route("/api/articlePlusVendus")
+     * @return Response
      */
-    public function top3ArticleAction($max)
+    public function articlePlusVendusAction(SoapService $soapService)
     {
-        $service = $this->container->get('soap_service');
-        $response = $service->articlePlusVendus($max);
+        $soapServer = new \SoapServer('articleWS.wsdl');
+        $soapServer->setObject($soapService);
+        $response = new Response();
+        $response->headers->set('Content-Type', 'text/xml; charset=ISO-8859-1');
+
+        ob_start();
+        $soapServer->handle();
+        $response->setContent(ob_get_clean());
 
         return $response;
     }
